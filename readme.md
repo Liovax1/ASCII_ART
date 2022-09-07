@@ -19,23 +19,7 @@ Contient un squelette de projet avec un test unitaire fonctionnel
 git clone https://gitlab.sn-kastler.fr/modeles/cmake_mod.git
 ```
 
-- Renommer le dossier <VOTRE_NOM>_ASCII_ART (Exemple PROUFF_ASCII_ART)
-  - Ouvrir le fichier CmakeLists.txt
-  - Modifier les lignes de ce fichier
-
-```
-project(CMAKE_mod LANGUAGES C CXX)
-add_executable(CMAKE_mod main.c)
-```
-
-- Mettre le nom de votre projet à la place de CMAKE_mod
-
-<u>Exemple</u>
-
-```
-project(PROUFF_ASCII_ART LANGUAGES C CXX)
-add_executable(PROUFF_ASCII_ART main.c)
-```
+- Renommer le dossier cloné en <VOTRE_NOM>_ASCII_ART (Exemple PROUFF_ASCII_ART)
 
 - Ouvrir le projet dans QtCreator
 
@@ -44,7 +28,7 @@ add_executable(PROUFF_ASCII_ART main.c)
 - Modifier l'url du dépot
 
 ```
-git remote set-url origin https://gitlab.sn-kastler.fr/<votre_nom>/<votre_depot>.git
+git remote set-url origin https://gitlab.sn-kastler.fr/votre_nom/votre_depot.git
 ```
 
 - Commiter votre code
