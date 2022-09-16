@@ -16,8 +16,9 @@
 int main()
 {
     printf("***********************************\n");
-    printf("                 SNIR-progASCII_art\n");
+    printf("                 SNIR-Programme ASCII_ART\n");
     printf("***********************************\n\n");
     printf("AAA\n AAAA AA\n AAAAAAA AA\n");
+    printf("AAA\n AAA");
     return 0;
 }
