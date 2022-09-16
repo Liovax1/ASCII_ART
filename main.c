@@ -18,7 +18,14 @@ int main()
     printf("***********************************\n");
     printf("                 SNIR-Programme ASCII_ART\n");
     printf("***********************************\n\n");
-    printf("AAA\n AAAA AA\n AAAAAAA AA\n");
-    printf("AAA\n AAA");
+    printf("  AAA\n AAAAA\nAA   AA\n");
+    printf("AAAAAAA\nAA   AA\n");
+    printf("\n");
+    printf("BBBBB\nBB   B\nBBBBBB\nBB   BB\nBBBBBB\n");
+    printf("\n");
+    printf(" CCCCC\nCC    C\nCC     \nCC    C\n CCCCC \n");
+    printf("\n");
+    printf("Quelle lettre souhaitez-vous afficher ? (A,B ou C)");
+    scanf("");
     return 0;
 }
