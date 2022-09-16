@@ -28,7 +28,7 @@ git clone https://gitlab.sn-kastler.fr/modeles/cmake_mod.git
 - Modifier l'url du dépot
 
 ```
-git remote set-url origin https://gitlab.sn-kastler.fr/votre_nom/votre_depot.git
+git remote set-url origin https://gitlab.sn-kastler.fr/Hovakimyan/Ascii_art/.git
 ```
 
 - Commiter votre code

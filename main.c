@@ -1,9 +1,9 @@
 /**
  * @file main.c
  * @brief Projet modèle pour Integration Continue
- * @author Sébastien PROUFF
+ * @author Liova Hovakimyan
  * @version 
- * @date 05/09/2020
+ * @date 15/09/2022
  */
 
 #include <stdio.h>
@@ -16,7 +16,8 @@
 int main()
 {
     printf("***********************************\n");
-    printf("                 SNIR \n");
+    printf("                 SNIR-progASCII_art\n");
     printf("***********************************\n\n");
+    printf("AAA\n AAAA AA\n AAAAAAA AA\n");
     return 0;
 }
