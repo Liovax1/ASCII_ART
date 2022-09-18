@@ -25,7 +25,7 @@ int main()
     printf("\n");
     printf(" CCCCC\nCC    C\nCC     \nCC    C\n CCCCC \n");
     printf("\n");
-    printf("Quelle lettre souhaitez-vous afficher ? (A,B ou C)");
+    printf("Quelle lettre souhaitez-vous afficher (A,B ou C) ?:\n");
     scanf("");
     return 0;
 }
