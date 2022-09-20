@@ -13,11 +13,10 @@
  * @param aucun paramètre.
  * @return 0 - Arrêt normal du programme.
  */
-int main()
+int main(void)
 {
 
 //int lettre;
-
 
     printf("***********************************\n");
     printf("                 SNIR-Programme ASCII_ART\n");
@@ -34,7 +33,13 @@ int main()
     printf("Quelle lettre souhaitez-vous afficher (A,B ou C) ?:\n");
     scanf("%c", &lettre);
     printf("La lettre est %c\n", lettre);
+    printf("\n");
     if (lettre == 'A'){
+        printf("  AAA\n AAAAA\nAA   AA\n");
+        printf("AAAAAAA\nAA   AA\n");
+    }
+
+    if (lettre == 'a'){
         printf("  AAA\n AAAAA\nAA   AA\n");
         printf("AAAAAAA\nAA   AA\n");
     }
@@ -43,11 +48,21 @@ int main()
         printf("BBBBB\nBB   B\nBBBBBB\nBB   BB\nBBBBBB\n");
     }
 
+    if (lettre == 'b'){
+        printf("BBBBB\nBB   B\nBBBBBB\nBB   BB\nBBBBBB\n");
+    }
+
     if (lettre == 'C'){
+        printf(" CCCCC\nCC    C\nCC     \nCC    C\n CCCCC \n");
+    }
+
+    if (lettre == 'c'){
         printf(" CCCCC\nCC    C\nCC     \nCC    C\n CCCCC \n");
     }
     if (lettre != 'A' && lettre != 'B' && lettre != 'C')
         printf ("Impossible ! Veuillez choisir une lettre entre A, B et C\n");
+    printf("\n");
+
 
     return 0;
 }
