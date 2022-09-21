@@ -2,7 +2,7 @@
  * @file main.c
  * @brief Projet Ascii_art
  * @author Liova Hovakimyan
- * @version 
+ * @version 1.0
  * @date 15/09/2022
  */
 
