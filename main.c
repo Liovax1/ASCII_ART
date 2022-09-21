@@ -1,6 +1,6 @@
 /**
  * @file main.c
- * @brief Projet modèle pour Integration Continue
+ * @brief Projet Ascii_art
  * @author Liova Hovakimyan
  * @version 
  * @date 15/09/2022
@@ -16,10 +16,8 @@
 int main(void)
 {
 
-    //int lettre;
-
     printf("***********************************\n");
-    printf("                 SNIR-Programme ASCII_ART\n");
+    printf("                 SNIR-Programme ASCII_ARTv1.0\n");
     printf("***********************************\n\n");
     printf("  AAA\n AAAAA\nAA   AA\n");
     printf("AAAAAAA\nAA   AA\n");
