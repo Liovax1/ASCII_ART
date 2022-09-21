@@ -13,7 +13,7 @@
  * @param aucun paramètre.
  * @return 0 - Arrêt normal du programme.
  */
-int main(void)
+int main()
 {
 
     printf("***********************************\n");
