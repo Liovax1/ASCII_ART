@@ -17,7 +17,7 @@ int main()
 {
 
     printf("***********************************\n");
-    printf("                 SNIR-Programme ASCII_ARTv1.0\n");
+    printf("                 SNIR-Programme ASCII_ART\n");
     printf("***********************************\n\n");
     //printf("  AAA\n AAAAA\nAA   AA\n");
     //printf("AAAAAAA\nAA   AA\n");
@@ -26,6 +26,7 @@ int main()
     //printf("\n");
     //printf(" CCCCC\nCC    C\nCC     \nCC    C\n CCCCC \n");
     //printf("\n");
+
     char condition;
     char lettre;
     printf("Quelle lettre souhaitez-vous afficher (A,B ou C) ?:\n");
@@ -39,23 +40,36 @@ int main()
         printf("  AAA\n AAAAA\nAA   AA\n");
         printf("AAAAAAA\nAA   AA\n");
         break;
+
     case 'B' :
         printf("BBBBB\nBB   B\nBBBBBB\nBB   BB\nBBBBBB\n");
         break;
+
     case 'C' :
         printf(" CCCCC\nCC    C\nCC     \nCC    C\n CCCCC \n");
         break;
+
+    default :
+        printf(" Impossible ! Votre lettre doit etre en majuscule\n");
     }
-    if (lettre != 'A' && lettre != 'B' && lettre != 'C') {
-    printf ("Impossible ! Veuillez choisir une lettre entre A, B et C\n");
-    printf("\n");
+    char letter = 1;
+    while (letter = 'A'){
+        printf("Quelle lettre souhaitez-vous afficher (A,B ou C) ?:\n");
+        scanf("%c", &lettre);
+        printf("La lettre est %c\n", lettre);
+        printf("\n");
     }
 
+    if (lettre == 'a' && lettre == 'b' && lettre == 'c')
 
-
-
+        printf ("Impossible ! Veuillez choisir une lettre entre A, B et C\n");
+        printf("\n");
     return 0;
 }
+
+
+
+
 
 
 
@@ -77,3 +91,12 @@ int main()
 //if (lettre != 'A' && lettre != 'B' && lettre != 'C')
 // printf ("Impossible ! Veuillez choisir une lettre entre A, B et C\n");
 // printf("\n");
+
+
+//    do
+//    {
+//        printf("Quelle lettre souhaitez-vous afficher (A,B ou C) ?:\n");
+//        scanf("%c", &lettre);
+//        printf("La lettre est %c\n", lettre);
+//        printf("\n");
+//    } while (0);
