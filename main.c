@@ -8,6 +8,8 @@
 
 #include <stdio.h>
 /**
+ * @fn void viderBuffer(void)
+ * @brief Vide le buffer de lecture clavier.
  * @fn int main (void)
  * @brief Fonction principale du programme.
  * @param aucun paramètre.
@@ -29,74 +31,45 @@ int main()
 
     char condition;
     char lettre;
-    printf("Quelle lettre souhaitez-vous afficher (A,B ou C) ?:\n");
-    scanf("%c", &lettre);
-    void viderbuffer();
-    printf("La lettre est %c\n", lettre);
-    printf("\n");
-    switch (lettre)
+    int choix;
+
+    do
     {
-    case 'A' :
-        printf("  AAA\n AAAAA\nAA   AA\n");
-        printf("AAAAAAA\nAA   AA\n");
-        break;
-
-    case 'B' :
-        printf("BBBBB\nBB   B\nBBBBBB\nBB   BB\nBBBBBB\n");
-        break;
-
-    case 'C' :
-        printf(" CCCCC\nCC    C\nCC     \nCC    C\n CCCCC \n");
-        break;
-
-    default :
-        printf(" Impossible ! Votre lettre doit etre en majuscule\n");
-    }
-    char letter = 1;
-    while (letter = 'A'){
         printf("Quelle lettre souhaitez-vous afficher (A,B ou C) ?:\n");
         scanf("%c", &lettre);
+        void viderBuffer();
         printf("La lettre est %c\n", lettre);
         printf("\n");
-    }
+        switch (lettre)
+        {
 
-    if (lettre == 'a' && lettre == 'b' && lettre == 'c')
+        case 'A' :
+            printf("  AAA\n AAAAA\nAA   AA\n");
+            printf("AAAAAAA\nAA   AA\n");
+            break;
 
-        printf ("Impossible ! Veuillez choisir une lettre entre A, B et C\n");
-        printf("\n");
+        case 'B' :
+            printf("BBBBB\nBB   B\nBBBBBB\nBB   BB\nBBBBBB\n");
+            break;
+
+        case 'C' :
+            printf(" CCCCC\nCC    C\nCC     \nCC    C\n CCCCC \n");
+            break;
+        case '*' :
+            printf (" Voulez-vous quitter le programme ?");
+
+        default :
+            printf(" Impossible ! Votre lettre doit etre A, B ou C en majuscule\n");
+        }
+        if (lettre == '*')
+        {
+            exit(0);
+        }
+    } while (choix !=1);
+
+    //    if (lettre == 'a' && lettre == 'b' && lettre == 'c')
+
+    //        printf ("Impossible ! Veuillez choisir une lettre entre A, B et C\n");
+    //    printf("\n");
     return 0;
 }
-
-
-
-
-
-
-
-
-
-//if (lettre == 'A' || lettre == 'a'){
-// printf("  AAA\n AAAAA\nAA   AA\n");
-//printf("AAAAAAA\nAA   AA\n");
-//}
-
-//if (lettre == 'B' || lettre == 'b'){
-//printf("BBBBB\nBB   B\nBBBBBB\nBB   BB\nBBBBBB\n");
-//}
-
-//if (lettre == 'C' || lettre == 'c'){
-// printf(" CCCCC\nCC    C\nCC     \nCC    C\n CCCCC \n");
-//}
-
-//if (lettre != 'A' && lettre != 'B' && lettre != 'C')
-// printf ("Impossible ! Veuillez choisir une lettre entre A, B et C\n");
-// printf("\n");
-
-
-//    do
-//    {
-//        printf("Quelle lettre souhaitez-vous afficher (A,B ou C) ?:\n");
-//        scanf("%c", &lettre);
-//        printf("La lettre est %c\n", lettre);
-//        printf("\n");
-//    } while (0);
