@@ -35,8 +35,10 @@ int main()
 
     do
     {
+        printf("\n");
         printf("Quelle lettre souhaitez-vous afficher (A,B ou C) ?:\n");
         scanf("%c", &lettre);
+        getchar();
         void viderBuffer();
         printf("La lettre est %c\n", lettre);
         printf("\n");
