@@ -21,13 +21,6 @@ int main()
     printf("***********************************\n");
     printf("                 SNIR-Programme ASCII_ART\n");
     printf("***********************************\n\n");
-    //printf("  AAA\n AAAAA\nAA   AA\n");
-    //printf("AAAAAAA\nAA   AA\n");
-    //printf("\n");
-    //printf("BBBBB\nBB   B\nBBBBBB\nBB   BB\nBBBBBB\n");
-    //printf("\n");
-    //printf(" CCCCC\nCC    C\nCC     \nCC    C\n CCCCC \n");
-    //printf("\n");
 
     char condition;
     char lettre;
@@ -69,9 +62,5 @@ int main()
         }
     } while (choix !=1);
 
-    //    if (lettre == 'a' && lettre == 'b' && lettre == 'c')
-
-    //        printf ("Impossible ! Veuillez choisir une lettre entre A, B et C\n");
-    //    printf("\n");
     return 0;
 }
