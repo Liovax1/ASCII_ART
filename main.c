@@ -7,6 +7,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 /**
  * @fn void viderBuffer(void)
  * @brief Vide le buffer de lecture clavier.
@@ -15,6 +16,16 @@
  * @param aucun paramètre.
  * @return 0 - Arrêt normal du programme.
  */
+
+/**
+ * @fn void afficherAsciiArt(void)
+ * @brief Affiche AsciiArt
+ * @fn int main (void)
+ * @brief Fonction principale du programme.
+ * @param char caractère
+ * @return 0 - Arrêt normal du programme.
+ */
+void afficherAsciiArt(char caractère);
 int main()
 {
 
@@ -45,6 +56,11 @@ int main()
                           {' ','C','C','C','C','C',' ','\0'}};
 
 
+    int longueur = strlen (tableauA);
+    for (i=0 ;i<longueur ; i++){
+        printf ("%c", longueur);
+    }
+//afficherAsciiArt(lettre);
     for (i=0 ; i<5 ; i++) {
         printf("%s\n", tableauA[i]);
     }
@@ -70,6 +86,7 @@ int main()
         void viderBuffer();
         printf("La lettre est %c\n", lettre);
         printf("\n");
+
         switch (lettre)
         {
 
