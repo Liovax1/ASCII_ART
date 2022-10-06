@@ -13,7 +13,16 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(${ProjectId} main.c)
+#Extrait du fichier CmakeList.txt
+#Ajouter les fichiers sources de votre projet
+set(SRCS
+    img_bmp/img_bmp.c
+    )
+#Ajouter les fichiers headers de votre projet
+set(HEADERS
+    img_bmp/img_bmp.h
+    )
+add_executable(${ProjectId} main.c ${SRCS} ${HEADERS})
 
 #enable_testing()
 #include(CTest)

@@ -1,0 +1,3 @@
+[submodule "img_bmp"]
+	path = img_bmp
+	url = https://gitlab.sn-kastler.fr/1-langage-c/ascii_art_img_submodule.git

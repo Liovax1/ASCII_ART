@@ -11,10 +11,6 @@
 /**
  * @fn void viderBuffer(void)
  * @brief Vide le buffer de lecture clavier.
- * @fn int main (void)
- * @brief Fonction principale du programme.
- * @param aucun paramètre.
- * @return 0 - Arrêt normal du programme.
  */
 
 /**
@@ -25,8 +21,64 @@
  * @param char caractère
  * @return 0 - Arrêt normal du programme.
  */
-void afficherAsciiArt(char caractère);
+char tableauA[5][8]= {{' ',' ','A','A','A',' ',' ','\0'},
+                      {' ','A','A','A','A','A',' ','\0'},
+                      {'A','A',' ',' ',' ','A','A','\0'},
+                      {'A','A','A','A','A','A','A','\0'},
+                      {'A','A',' ',' ',' ','A','A','\0'}};
+
+char tableauB[5][8]= {{'B','B','B','B','B',' ',' ','\0'},
+                      {'B','B',' ',' ',' ','B',' ','\0'},
+                      {'B','B','B','B','B','B',' ','\0'},
+                      {'B','B',' ',' ',' ','B','B','\0'},
+                      {'B','B','B','B','B','B',' ','\0'}};
+
+char tableauC[5][8]= {{' ','C','C','C','C','C',' ','\0'},
+                      {'C','C',' ',' ',' ',' ','C','\0'},
+                      {'C','C',' ',' ',' ',' ',' ','\0'},
+                      {'C','C',' ',' ',' ',' ','C','\0'},
+                      {' ','C','C','C','C','C',' ','\0'}};
+
+
+
+void afficherAsciiArt(char caractere)
+{
+    int i;
+    int longueur = strlen (tableauA);
+    for (i=0 ;i<longueur ; i++){
+        printf ("%d", longueur);
+
+    }
+    //afficherAsciiArt(lettre);
+    for (i=0 ; i<5 ; i++) {
+        printf("%s\n", tableauA[i]);
+    }
+    printf("\n");
+
+    for (i=0 ; i<5 ; i++) {
+        printf("%s\n", tableauB[i]);
+    }
+    printf("\n");
+
+    for (i=0 ;i<5 ; i++) {
+        printf("%s\n", tableauC[i]);
+    }
+    printf("\n");
+}
+
+/*
+* @fn int main (void)
+* @brief Fonction principale du programme.
+* @param aucun paramètre.
+* @return 0 - Arrêt normal du programme.
+*/
 int main()
+{
+    return 0;
+}
+
+
+void sousfonctionadaptee(void)
 {
 
     printf("***********************************\n");
@@ -37,45 +89,29 @@ int main()
     char lettre;
     int choix;
     int i;
-    char tableauA[5][8]= {{' ',' ','A','A','A',' ',' ','\0'},
-                          {' ','A','A','A','A','A',' ','\0'},
-                          {'A','A',' ',' ',' ','A','A','\0'},
-                          {'A','A','A','A','A','A','A','\0'},
-                          {'A','A',' ',' ',' ','A','A','\0'}};
 
-    char tableauB[5][8]= {{'B','B','B','B','B',' ',' ','\0'},
-                         {'B','B',' ',' ',' ','B',' ','\0'},
-                         {'B','B','B','B','B','B',' ','\0'},
-                         {'B','B',' ',' ',' ','B','B','\0'},
-                         {'B','B','B','B','B','B',' ','\0'}};
-
-    char tableauC[5][8]= {{' ','C','C','C','C','C',' ','\0'},
-                          {'C','C',' ',' ',' ',' ','C','\0'},
-                          {'C','C',' ',' ',' ',' ',' ','\0'},
-                          {'C','C',' ',' ',' ',' ','C','\0'},
-                          {' ','C','C','C','C','C',' ','\0'}};
 
 
     int longueur = strlen (tableauA);
     for (i=0 ;i<longueur ; i++){
         printf ("%c", longueur);
+        afficherAsciiArt;
     }
-//afficherAsciiArt(lettre);
+    //afficherAsciiArt(lettre);
     for (i=0 ; i<5 ; i++) {
         printf("%s\n", tableauA[i]);
     }
-        printf("\n");
+    printf("\n");
 
     for (i=0 ; i<5 ; i++) {
         printf("%s\n", tableauB[i]);
     }
-        printf("\n");
+    printf("\n");
 
     for (i=0 ;i<5 ; i++) {
         printf("%s\n", tableauC[i]);
     }
-        printf("\n");
-
+    printf("\n");
 
     do
     {
@@ -83,7 +119,7 @@ int main()
         printf("Quelle lettre souhaitez-vous afficher (A,B ou C) ?:\n");
         scanf("%c", &lettre);
         getchar();
-        void viderBuffer();
+//        viderBuffer();
         printf("La lettre est %c\n", lettre);
         printf("\n");
 
@@ -112,6 +148,4 @@ int main()
             exit(0);
         }
     } while (choix !=1);
-
-    return 0;
 }
