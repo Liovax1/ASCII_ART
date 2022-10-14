@@ -487,29 +487,29 @@ void afficherAsciiArt(char lettre)
         break;
     }
         afficherAsciiArt('Y');
-        case 'Y' :
-        {
-            for (int i=0 ; i<5 ; i++) {
-                for (int j=0 ; j<8 ; j++) {
+    case 'Y' :
+    {
+        for (int i=0 ; i<5 ; i++) {
+            for (int j=0 ; j<8 ; j++) {
 
-                    printf("%c", tableauY[i][j]);
-                }
-                printf("\n");
+                printf("%c", tableauY[i][j]);
             }
-            break;
+            printf("\n");
         }
+        break;
+    }
         afficherAsciiArt('Z');
-        case 'Z' :
-        {
-            for (int i=0 ; i<5 ; i++) {
-                for (int j=0 ; j<8 ; j++) {
+    case 'Z' :
+    {
+        for (int i=0 ; i<5 ; i++) {
+            for (int j=0 ; j<8 ; j++) {
 
-                    printf("%c", tableauZ[i][j]);
-                }
-                printf("\n");
+                printf("%c", tableauZ[i][j]);
             }
-            break;
+            printf("\n");
         }
+        break;
+    }
     default :
         printf(" Impossible ! Votre lettre doit etre A, B ou C en majuscule\n");
     }
@@ -547,6 +547,97 @@ void afficherPhrase(void)
 }
 
 
+typedef struct
+{
+    char signature[2];
+    int taille;
+    int rsv;
+    int offsethim;
+}
+
+BMPHead;
+
+typedef struct
+{
+    int size_imhead;
+    int largeur;
+    int hauteur;
+    short nbplans;
+    short bpp;
+    int hres;
+    int compression;
+    int sizeim;
+    int vres;
+    int clpalette;
+    int cpalette;
+}
+
+BMPimHead;
+
+
+/**
+ * @fn chargerImage (void)
+ * @brief affiche les premiers octets du fichier et sa taille.
+ * @param fichier a ouvrir.
+ * @return 0 - Arrêt normal du programme.
+ */
+int chargerImage (char *fichier);
+
+int chargerImage (char *fichier){
+    printf("Nom du fichier a ouvrir: %s \n", "tux64.bmp");
+    fichier = fopen("ImagesBmp/tux64.bmp", "rb");
+    if (!fichier)  {
+        printf("Erreur ouverture \n");
+        exit(-1);
+
+        char signature[2];
+        int taille [4];
+        int test = fread(signature, 2, 1, fichier);
+        int testTaille = fread(taille, 4, 1, fichier);
+        if(test != 1) {
+            printf("fread impossible \n");
+            exit(-1);
+        }
+        printf("Lecture de %c et %c \n", signature[0], signature[1]);
+        printf("Taille du fichier: %d %d %d %d\n", taille[0],taille[1],taille[2],taille[3]);
+        fclose(fichier);
+
+        BMPHead head;
+        BMPimHead imHead;
+
+        return 0;
+    }
+
+}
+
+void AfficherInfoImageHead(BMPHead head, char *fichier)
+{
+    FILE *file;
+    char signature[2];
+    file = fopen(fichier, "rb");
+    int test = fread(signature, 2, 1, file);
+    if (!file)  {
+        printf("Erreur ouverture \n");
+        exit(-1);
+    }
+    printf("Lecture de %c et %c\n", signature[0], signature[1]);
+    fclose(file);
+}
+
+void AfficherInfoImageImHead(BMPimHead imhead)
+{
+    FILE *file;
+    int taille;
+    int testTaille = fread(&taille, 4, 1, file);
+    if(testTaille != 1) {
+        printf("fread impossible \n");
+        printf("\n");
+        exit(-1);
+    }
+    printf("taille du fichier: %d octets\n", taille);
+    fclose(file);
+}
+
 /**
 * @fn int main (void)
 * @brief Fonction principale du programme.
@@ -575,6 +666,8 @@ int main()
     printf("Lecture de %c et %c \n", signature[0], signature[1]);
     printf("Taille du fichier: %d %d %d %d\n", taille[0],taille[1],taille[2],taille[3]);
     fclose(file);
+
+    chargerImage("ImagesBmp/tux64");
 
     return 0;
 }
