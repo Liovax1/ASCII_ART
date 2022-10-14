@@ -3,7 +3,7 @@
  * @brief Projet Ascii_art
  * @author Liova Hovakimyan
  * @version 4.0
- * @date 15/09/2022
+ * @date 14/10/2022
  */
 
 #include <stdio.h>
@@ -46,6 +46,14 @@ char tableauC[5][8]= {{' ','C','C','C','C','C',' ','\0'},
                       {' ','C','C','C','C','C',' ','\0'}};
 
 
+/**
+* @fn void afficherAsciiArt(void)
+* @brief Affiche AsciiArt
+* @fn int main (void)
+* @brief Fonction principale du programme.
+* @param caractère
+* @return 0 - Arrêt normal du programme.
+*/
 
 void afficherAsciiArt(char lettre);
 void afficherPhrase(void);
@@ -138,21 +146,23 @@ int main()
     FILE *file;
 
     printf("Nom du fichier a ouvrir: %s \n", "tux64.bmp");
-    file = fopen("/ImagesBmp/tux64.bmp", "rb");
+    file = fopen("ImagesBmp/tux64.bmp", "rb");
     if (!file)  {
         printf("Erreur ouverture \n");
         exit(-1);
     }
     char signature[2];
-    int taille [1];
+    int taille [4];
     int test = fread(signature, 2, 1, file);
+    int testTaille = fread(taille, 4, 1, file);
     if(test != 1) {
         printf("fread impossible \n");
         exit(-1);
     }
     printf("Lecture de %c et %c \n", signature[0], signature[1]);
-    printf("Taille totale du fichier: %d %d %d %d\n", taille[0]);
+    printf("Taille du fichier: %d %d %d %d\n", taille[0],taille[1],taille[2],taille[3]);
     fclose(file);
+
     return 0;
 }
 
