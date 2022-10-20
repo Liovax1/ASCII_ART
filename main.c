@@ -14,6 +14,7 @@
 
 #pragma pack(1) // desactive l'alignement mémoire
 
+
 /**
  * @fn void viderBuffer(void)
  * @brief Vide le buffer de lecture clavier.
@@ -547,7 +548,7 @@ void afficherPhrase(void)
 }
 
 
-typedef struct
+typedef struct BMPHead
 {
     char signature[2];
     int taille;
@@ -557,7 +558,7 @@ typedef struct
 
 BMPHead;
 
-typedef struct
+typedef struct BMPimHead
 {
     int size_imhead;
     int largeur;
@@ -568,12 +569,37 @@ typedef struct
     int compression;
     int sizeim;
     int vres;
-    int clpalette;
     int cpalette;
+    int clpalette;
 }
 
 BMPimHead;
 
+
+void AfficherInfoImageHead(BMPHead head)
+{
+    printf("Les premiers caracteres sont : %c et %c\n",head.signature[0],head.signature[1]);
+    printf("La taille est de : %d octets\n",head.taille);
+    printf("Le premier champ de reserve est : %d \n",head.rsv);
+    printf("L'adresse de definition de l'image est : %d \n",head.offsettim);
+
+}
+
+void AfficherInfoImageimHead(BMPimHead imHead)
+{
+    printf("La taille en octets de l'en-tete est de : %d octets \n",imHead.size_imhead);
+    printf("La largeur de l'image est de : %d px\n",imHead.largeur);
+    printf("La hauteur de l'image est de : %d px\n",imHead.hauteur);
+    printf("Le nombre de plans est egale a : %hd \n",imHead.nbplans);
+    printf("Le nombre de bits par pixel est de : %hd \n",imHead.bpp);
+    printf("La compression est de : %d \n",imHead.compression);
+    printf("La taille des donnees de l'image est de : %d octets\n",imHead.sizeim);
+    printf("La resolution horizontale de l'image est de  : %d \n",imHead.hres);
+    printf("La resolution verticale de l'image est de : %d \n",imHead.vres);
+    printf("Le nombre de couleurs dans l'image est de : %d couleur(s)\n",imHead.cpalette);
+    printf("Le nombre de couleurs importantes dans l'image est de : %d couleur(s)\n",imHead.clpalette);
+
+}
 
 /**
  * @fn chargerImage (void)
@@ -581,9 +607,10 @@ BMPimHead;
  * @param fichier a ouvrir.
  * @return 0 - Arrêt normal du programme.
  */
-char chargerImage (char *fichier);
 
-char chargerImage(char *fichier)
+Image *chargerImage (char *fichier);
+
+Image *chargerImage(char *fichier)
 {
 
     FILE *file;
@@ -594,56 +621,27 @@ char chargerImage(char *fichier)
         printf("Erreur ouverture \n");
         exit(-1);
     }
-    char signature[2];
-    int test = fread(signature, 2, 1, file);
+    BMPHead head;
+    int test = fread(&head, 14, 1, file);
     if(test != 1) {
         printf("fread impossible \n");
         exit(-1);
     }
-    printf("Type de fichier: %c%c \n", signature[0], signature[1]);
-    int taille;
-    int testTaille = fread(&taille, 4, 1, file);
-    if (test !=1){
-        printf("fread impossible ! \n");
-    }
-    printf("Taille du fichier: %d octets\n", taille);
-    fclose(file);
-
-    BMPHead head;
+    AfficherInfoImageHead(head);
     BMPimHead imHead;
-
+    //int taille;
+    int testTaille = fread(&imHead, 40, 1, file);
+    if (testTaille !=1){
+        printf("fread impossible ! \n");
+        exit(-1);
+    }
+    AfficherInfoImageimHead(imHead);
+    fclose(file);
 
     return 0;
 
 }
 
-void AfficherInfoImageHead(BMPHead head)
-{
-    FILE *file;
-    char signature[2];
-    file = fopen(file, "rb");
-    int test = fread(signature, 2, 1, file);
-    if (!file)  {
-        printf("Erreur ouverture \n");
-        exit(-1);
-    }
-    printf("Lecture de %c et %c\n", signature[0], signature[1]);
-    fclose(file);
-}
-
-void AfficherInfoImageImHead(BMPimHead imhead)
-{
-    FILE *file;
-    int taille;
-    int testTaille = fread(&taille, 4, 1, file);
-    if(testTaille != 1) {
-        printf("fread impossible \n");
-        printf("\n");
-        exit(-1);
-    }
-    printf("taille du fichier: %d octets\n", taille);
-    fclose(file);
-}
 
 /**
 * @fn int main (void)
@@ -658,3 +656,4 @@ int main()
 
     return 0;
 }
+
