@@ -552,7 +552,7 @@ typedef struct
     char signature[2];
     int taille;
     int rsv;
-    int offsethim;
+    int offsettim;
 }
 
 BMPHead;
@@ -581,40 +581,47 @@ BMPimHead;
  * @param fichier a ouvrir.
  * @return 0 - Arrêt normal du programme.
  */
-int chargerImage (char *fichier);
+char chargerImage (char *fichier);
 
-int chargerImage (char *fichier){
+char chargerImage(char *fichier)
+{
+
+    FILE *file;
+
     printf("Nom du fichier a ouvrir: %s \n", "tux64.bmp");
-    fichier = fopen("ImagesBmp/tux64.bmp", "rb");
-    if (!fichier)  {
+    file = fopen("ImagesBmp/tux64.bmp", "rb");
+    if (!file)  {
         printf("Erreur ouverture \n");
         exit(-1);
-
-        char signature[2];
-        int taille [4];
-        int test = fread(signature, 2, 1, fichier);
-        int testTaille = fread(taille, 4, 1, fichier);
-        if(test != 1) {
-            printf("fread impossible \n");
-            exit(-1);
-        }
-        printf("Lecture de %c et %c \n", signature[0], signature[1]);
-        printf("Taille du fichier: %d %d %d %d\n", taille[0],taille[1],taille[2],taille[3]);
-        fclose(fichier);
-
-        BMPHead head;
-        BMPimHead imHead;
-
-        return 0;
     }
+    char signature[2];
+    int test = fread(signature, 2, 1, file);
+    if(test != 1) {
+        printf("fread impossible \n");
+        exit(-1);
+    }
+    printf("Type de fichier: %c%c \n", signature[0], signature[1]);
+    int taille;
+    int testTaille = fread(&taille, 4, 1, file);
+    if (test !=1){
+        printf("fread impossible ! \n");
+    }
+    printf("Taille du fichier: %d octets\n", taille);
+    fclose(file);
+
+    BMPHead head;
+    BMPimHead imHead;
+
+
+    return 0;
 
 }
 
-void AfficherInfoImageHead(BMPHead head, char *fichier)
+void AfficherInfoImageHead(BMPHead head)
 {
     FILE *file;
     char signature[2];
-    file = fopen(fichier, "rb");
+    file = fopen(file, "rb");
     int test = fread(signature, 2, 1, file);
     if (!file)  {
         printf("Erreur ouverture \n");
@@ -647,26 +654,6 @@ void AfficherInfoImageImHead(BMPimHead imhead)
 
 int main()
 {
-    FILE *file;
-
-    printf("Nom du fichier a ouvrir: %s \n", "tux64.bmp");
-    file = fopen("ImagesBmp/tux64.bmp", "rb");
-    if (!file)  {
-        printf("Erreur ouverture \n");
-        exit(-1);
-    }
-    char signature[2];
-    int taille [4];
-    int test = fread(signature, 2, 1, file);
-    int testTaille = fread(taille, 4, 1, file);
-    if(test != 1) {
-        printf("fread impossible \n");
-        exit(-1);
-    }
-    printf("Lecture de %c et %c \n", signature[0], signature[1]);
-    printf("Taille du fichier: %d %d %d %d\n", taille[0],taille[1],taille[2],taille[3]);
-    fclose(file);
-
     chargerImage("ImagesBmp/tux64");
 
     return 0;
