@@ -552,7 +552,7 @@ typedef struct
     char signature[2];
     int taille;
     int rsv;
-    int offsethim;
+    int offsettim;
 }
 
 BMPHead;
@@ -583,30 +583,37 @@ BMPimHead;
  */
 char chargerImage (char *fichier);
 
-char chargerImage (char *fichier){
-    printf("Nom du fichier a ouvrir: %s \n", fichier);
-    fichier = fopen("ImagesBmp/tux64.bmp", "rb");
-    if (!fichier)  {
+char chargerImage(char *fichier)
+{
+
+    FILE *file;
+
+    printf("Nom du fichier à ouvrir: %s \n", "tux64.bmp");
+    file = fopen("ImagesBmp/tux64.bmp", "rb");
+    if (!file)  {
         printf("Erreur ouverture \n");
         exit(-1);
-
-        char signature[2];
-        int taille [4];
-        int test = fread(signature, 2, 1, fichier);
-        int testTaille = fread(taille, 4, 1, fichier);
-        if(test != 1) {
-            printf("fread impossible \n");
-            exit(-1);
-        }
-        printf("Lecture de %c et %c \n", signature[0], signature[1]);
-        printf("Taille du fichier: %d %d %d %d\n", taille[0],taille[1],taille[2],taille[3]);
-        fclose(fichier);
-
-        BMPHead head;
-        BMPimHead imHead;
-
-        return 0;
     }
+    char signature[2];
+    int test = fread(signature, 2, 1, file);
+    if(test != 1) {
+        printf("fread impossible \n");
+        exit(-1);
+    }
+    printf("Type de fichier: %c%c \n", signature[0], signature[1]);
+    int taille;
+    int testTaille = fread(&taille, 4, 1, file);
+    if (test !=1){
+        printf("fread impossible ! \n");
+    }
+    printf("Taille du fichier: %d octets\n", taille);
+    fclose(file);
+
+    BMPHead head;
+    BMPimHead imHead;
+
+
+    return 0;
 
 }
 
