@@ -588,7 +588,7 @@ char chargerImage(char *fichier)
 
     FILE *file;
 
-    printf("Nom du fichier à ouvrir: %s \n", "tux64.bmp");
+    printf("Nom du fichier a ouvrir: %s \n", "tux64.bmp");
     file = fopen("ImagesBmp/tux64.bmp", "rb");
     if (!file)  {
         printf("Erreur ouverture \n");
