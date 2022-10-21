@@ -614,6 +614,8 @@ Image *chargerImage(char *fichier)
 {
 
     FILE *file;
+    BMPHead head;
+    BMPimHead imHead;
 
     printf("Nom du fichier a ouvrir: %s \n", "tux64.bmp");
     file = fopen("ImagesBmp/tux64.bmp", "rb");
@@ -621,14 +623,13 @@ Image *chargerImage(char *fichier)
         printf("Erreur ouverture \n");
         exit(-1);
     }
-    BMPHead head;
     int test = fread(&head, 14, 1, file);
     if(test != 1) {
         printf("fread impossible \n");
         exit(-1);
     }
     AfficherInfoImageHead(head);
-    BMPimHead imHead;
+
     //int taille;
     int testTaille = fread(&imHead, 40, 1, file);
     if (testTaille !=1){
