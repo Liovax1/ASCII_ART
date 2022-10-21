@@ -625,8 +625,10 @@ Image *chargerImage(char *fichier)
     Pixel pxl;
     Image *Img;
     unsigned char RGBPix[3];
+    int j;
+    int i;
 
-    printf("Nom du fichier a ouvrir: %s \n", "tux64.bmp");
+    printf("Nom du fichier a ouvrir: %s \n", fichier);
     file = fopen(fichier, "rb");
     if (!file)  {
         printf("Erreur ouverture \n");
@@ -639,13 +641,27 @@ Image *chargerImage(char *fichier)
     }
     AfficherInfoImageHead(head);
 
-    //int taille;
     int testTaille = fread(&imHead, 40, 1, file);
     if (testTaille !=1){
         printf("fread impossible ! \n");
         exit(-1);
     }
     AfficherInfoImageimHead(imHead);
+
+    Img = creerNouvelleImage(imHead.hauteur,imHead.largeur);
+        fseek(file, imHead.size_imhead + 14, SEEK_SET); // Pour aller au début des données
+        for(int j = 0; j< imHead.hauteur; j++){
+            for(int i = 0; i<imHead.largeur; i++){
+                int testLecture = fread(&pxl, 3, 1, file);
+                if (testLecture != 1)  {
+                    printf("Erreur ouverture \n");
+                    exit(-1);
+
+            }
+            SetPixel(Img, i, Img->h - j - 1, pxl);
+        }
+    }
+
     fclose(file);
 
     return 0;
@@ -653,7 +669,7 @@ Image *chargerImage(char *fichier)
 }
 
 
-//fseek(file, imHeadBMP.sizeImhead + 14, SEEK_SET); // Pour aller au début des données
+
 //for (int j=0; j>14; j++);
 //POUR J; ALLANT de; 0 à HAUTEUR PAR PAS de 1
 //POUR I ALLANT DE 0 à LARGEUR PAR PAS de 1
