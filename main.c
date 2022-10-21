@@ -618,7 +618,7 @@ Image *chargerImage(char *fichier)
     BMPimHead imHead;
 
     printf("Nom du fichier a ouvrir: %s \n", "tux64.bmp");
-    file = fopen("ImagesBmp/tux64.bmp", "rb");
+    file = fopen(fichier, "rb");
     if (!file)  {
         printf("Erreur ouverture \n");
         exit(-1);
@@ -653,7 +653,7 @@ Image *chargerImage(char *fichier)
 
 int main()
 {
-    chargerImage("ImagesBmp/tux64");
+    chargerImage("ImagesBmp/tux64.bmp");
 
     return 0;
 }
