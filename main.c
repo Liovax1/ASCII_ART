@@ -587,7 +587,7 @@ void AfficherInfoImageHead(BMPHead head)
 
 void AfficherInfoImageimHead(BMPimHead imHead)
 {
-    printf("La taille en octets de l'en-tete est de : %d octets \n",imHead.size_imhead);
+    printf("La taille de l'en-tete est de : %d octets \n",imHead.size_imhead);
     printf("La largeur de l'image est de : %d px\n",imHead.largeur);
     printf("La hauteur de l'image est de : %d px\n",imHead.hauteur);
     printf("Le nombre de plans est egale a : %hd \n",imHead.nbplans);
@@ -600,6 +600,12 @@ void AfficherInfoImageimHead(BMPimHead imHead)
     printf("Le nombre de couleurs importantes dans l'image est de : %d couleur(s)\n",imHead.clpalette);
 
 }
+
+//creerNouvelleImage(int largeur, int hauteur)
+//{
+
+//}
+
 
 /**
  * @fn chargerImage (void)
@@ -616,6 +622,9 @@ Image *chargerImage(char *fichier)
     FILE *file;
     BMPHead head;
     BMPimHead imHead;
+    Pixel pxl;
+    Image *Img;
+    unsigned char RGBPix[3];
 
     printf("Nom du fichier a ouvrir: %s \n", "tux64.bmp");
     file = fopen(fichier, "rb");
@@ -643,6 +652,18 @@ Image *chargerImage(char *fichier)
 
 }
 
+
+//fseek(file, imHeadBMP.sizeImhead + 14, SEEK_SET); // Pour aller au début des données
+//for (int j=0; j>14; j++);
+//POUR J; ALLANT de; 0 à HAUTEUR PAR PAS de 1
+//POUR I ALLANT DE 0 à LARGEUR PAR PAS de 1
+//LIRE les valeurs RGB du pixel courant (fread)
+//AFFECTER le résultat de la lecture au pixel (attention 3 couleurs/pixel)
+////Utiliser la ligne ci-dessous pour remplir votre structure image
+////L’ordre de lecture dans le fichier BMP va du bas vers le haut !
+//SetPixel(Img, i, Img->h - j - 1, pxl);
+//FINPOUR
+//FINPOUR;
 
 /**
 * @fn int main (void)
