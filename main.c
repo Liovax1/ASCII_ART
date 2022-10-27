@@ -2,8 +2,8 @@
  * @file main.c
  * @brief Projet Ascii_art
  * @author Liova Hovakimyan
- * @version 4.0
- * @date 14/10/2022
+ * @version 5.0
+ * @date 26/10/2022
  */
 
 #include <stdio.h>
@@ -14,7 +14,9 @@
 
 #pragma pack(1) // desactive l'alignement mémoire
 
-
+Pixel pxl;
+Image *Img;
+unsigned char RGBPix[3];
 /**
  * @fn void viderBuffer(void)
  * @brief Vide le buffer de lecture clavier.
@@ -576,6 +578,13 @@ typedef struct BMPimHead
 BMPimHead;
 
 
+/**
+ * @fn AfficherInfoImageHead(BMPHead head)
+ * @brief affiche les informations de l’en-tête BMPHead.
+ * @param en tête BMPHead.
+ * @return aucune.
+ */
+
 void AfficherInfoImageHead(BMPHead head)
 {
     printf("Les premiers caracteres sont : %c et %c\n",head.signature[0],head.signature[1]);
@@ -584,6 +593,14 @@ void AfficherInfoImageHead(BMPHead head)
     printf("L'adresse de definition de l'image est : %d \n",head.offsettim);
 
 }
+
+
+/**
+ * @fn AfficherInfoImageimHead(BMPimHead imHead)
+ * @brief affiche les informations de l’en-tête BMPImHead.
+ * @param en tête BMPImHead.
+ * @return aucune.
+ */
 
 void AfficherInfoImageimHead(BMPimHead imHead)
 {
@@ -601,11 +618,6 @@ void AfficherInfoImageimHead(BMPimHead imHead)
 
 }
 
-//creerNouvelleImage(int largeur, int hauteur)
-//{
-
-//}
-
 
 /**
  * @fn chargerImage (void)
@@ -622,11 +634,8 @@ Image *chargerImage(char *fichier)
     FILE *file;
     BMPHead head;
     BMPimHead imHead;
-    Pixel pxl;
-    Image *Img;
-    unsigned char RGBPix[3];
 
-    printf("Nom du fichier a ouvrir: %s \n", "tux64.bmp");
+    printf("Nom du fichier a ouvrir: %s \n", fichier);
     file = fopen(fichier, "rb");
     if (!file)  {
         printf("Erreur ouverture \n");
@@ -639,31 +648,106 @@ Image *chargerImage(char *fichier)
     }
     AfficherInfoImageHead(head);
 
-    //int taille;
     int testTaille = fread(&imHead, 40, 1, file);
     if (testTaille !=1){
         printf("fread impossible ! \n");
         exit(-1);
     }
     AfficherInfoImageimHead(imHead);
+
+    Img = creerNouvelleImage(imHead.hauteur,imHead.largeur);
+    fseek(file, imHead.size_imhead + 14, SEEK_SET); // Pour aller au début des données
+    for(int j = 0; j< imHead.hauteur; j++){
+        for(int i = 0; i<imHead.largeur; i++){
+            int testLecture = fread(&pxl, 3, 1, file);
+            if (testLecture != 1)  {
+                printf("Erreur ouverture \n");
+                exit(-1);
+
+            }
+            SetPixel(Img, i, Img->h - j - 1, pxl);
+        }
+    }
+
     fclose(file);
 
-    return 0;
+    return Img;
 
 }
 
 
-//fseek(file, imHeadBMP.sizeImhead + 14, SEEK_SET); // Pour aller au début des données
-//for (int j=0; j>14; j++);
-//POUR J; ALLANT de; 0 à HAUTEUR PAR PAS de 1
-//POUR I ALLANT DE 0 à LARGEUR PAR PAS de 1
-//LIRE les valeurs RGB du pixel courant (fread)
-//AFFECTER le résultat de la lecture au pixel (attention 3 couleurs/pixel)
-////Utiliser la ligne ci-dessous pour remplir votre structure image
-////L’ordre de lecture dans le fichier BMP va du bas vers le haut !
-//SetPixel(Img, i, Img->h - j - 1, pxl);
-//FINPOUR
-//FINPOUR;
+/**
+ * @fn sauverAsciiArt(Image *Img, const char *fichier)
+ * @brief sauvegarde l’AsciiArt de l’image.
+ * @param l’image à sauvegarder et le nom du fichier de sauvegarde.
+ * @return 0 - Arrêt normal du programme.
+ */
+
+int sauverAsciiArt(Image *Img, const char *fichier)
+{
+    FILE *F;
+    Pixel p;
+    int i;
+    int j;
+    unsigned char bgrpix[3];
+    int couleurGris =0;
+    unsigned char gris;
+    /* Q12 Ouvrir Fichier */
+    F= fopen(fichier, "w+");
+    if (!F)
+    {
+        printf("Erreur ouverture \n");
+    }
+    for (j = 0; j < Img->h; j++) {
+        for (i = 0; i < Img->w; i++) {
+            p = GetPixel(Img, i, j);
+            bgrpix[2] = p.r;
+            bgrpix[1] = p.g;
+            bgrpix[0] = p.b;
+            /* Q13 Calculer niveau gris */
+            couleurGris= (p.r + p.g + p.b)/3;  //Gris=(R+V+B)/3
+            /* Q14 */
+            if (couleurGris >= 0 && couleurGris <40)
+            {
+                fwrite("*",1,1,F);
+            }
+            else if (couleurGris > 39 && couleurGris <75)
+            {
+                fwrite("&",1,1,F);
+            }
+            else if (couleurGris > 74 && couleurGris <111)
+            {
+                fwrite("%",1,1,F);
+            }
+            else if (couleurGris > 110 && couleurGris <142)
+            {
+                fwrite("$",1,1,F);
+            }
+            else if (couleurGris > 141 && couleurGris <178)
+            {
+                fwrite("#",1,1,F);
+            }
+            else if (couleurGris > 177 && couleurGris <202)
+            {
+                fwrite("@",1,1,F);
+            }
+            else if (couleurGris > 201 && couleurGris <237)
+            {
+                fwrite("|",1,1,F);
+            }
+            else if (couleurGris > 236 && couleurGris <=255)
+            {
+                fwrite("+",1,1,F);
+            }
+        }
+        fwrite("\n", 1, 1, F);
+    }
+    supprimerImage(Img);
+    fclose(F);
+
+    return 0;
+}
+
 
 /**
 * @fn int main (void)
@@ -675,6 +759,7 @@ Image *chargerImage(char *fichier)
 int main()
 {
     chargerImage("ImagesBmp/tux64.bmp");
+    sauverAsciiArt(Img,"ImagesBmp/tux64.txt");
 
     return 0;
 }
