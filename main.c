@@ -578,6 +578,13 @@ typedef struct BMPimHead
 BMPimHead;
 
 
+/**
+ * @fn AfficherInfoImageHead(BMPHead head)
+ * @brief affiche les informations de l’en-tête BMPHead.
+ * @param en tête BMPHead.
+ * @return aucune.
+ */
+
 void AfficherInfoImageHead(BMPHead head)
 {
     printf("Les premiers caracteres sont : %c et %c\n",head.signature[0],head.signature[1]);
@@ -586,6 +593,14 @@ void AfficherInfoImageHead(BMPHead head)
     printf("L'adresse de definition de l'image est : %d \n",head.offsettim);
 
 }
+
+
+/**
+ * @fn AfficherInfoImageimHead(BMPimHead imHead)
+ * @brief affiche les informations de l’en-tête BMPImHead.
+ * @param en tête BMPImHead.
+ * @return aucune.
+ */
 
 void AfficherInfoImageimHead(BMPimHead imHead)
 {
@@ -619,9 +634,6 @@ Image *chargerImage(char *fichier)
     FILE *file;
     BMPHead head;
     BMPimHead imHead;
-
-    //int j;
-    //int i;
 
     printf("Nom du fichier a ouvrir: %s \n", fichier);
     file = fopen(fichier, "rb");
@@ -695,35 +707,35 @@ int sauverAsciiArt(Image *Img, const char *fichier)
             /* Q13 Calculer niveau gris */
             couleurGris= (p.r + p.g + p.b)/3;  //Gris=(R+V+B)/3
             /* Q14 */
-            if (couleurGris >= 0 && couleurGris <37)
+            if (couleurGris >= 0 && couleurGris <40)
             {
                 fwrite("*",1,1,F);
             }
-            else if (couleurGris > 36 && couleurGris <72)
+            else if (couleurGris > 39 && couleurGris <75)
             {
                 fwrite("&",1,1,F);
             }
-            else if (couleurGris > 71 && couleurGris <108)
+            else if (couleurGris > 74 && couleurGris <111)
             {
                 fwrite("%",1,1,F);
             }
-            else if (couleurGris > 107 && couleurGris <143)
+            else if (couleurGris > 110 && couleurGris <142)
             {
                 fwrite("$",1,1,F);
             }
-            else if (couleurGris > 142 && couleurGris <178)
+            else if (couleurGris > 141 && couleurGris <178)
             {
                 fwrite("#",1,1,F);
             }
-            else if (couleurGris > 177 && couleurGris <203)
+            else if (couleurGris > 177 && couleurGris <202)
             {
                 fwrite("@",1,1,F);
             }
-            else if (couleurGris > 202 && couleurGris <238)
+            else if (couleurGris > 201 && couleurGris <237)
             {
                 fwrite("|",1,1,F);
             }
-            else if (couleurGris > 237 && couleurGris <=255)
+            else if (couleurGris > 236 && couleurGris <=255)
             {
                 fwrite("+",1,1,F);
             }
